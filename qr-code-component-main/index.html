@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | QR code component</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+    
+    :root {
+      --primary-color: hsl(212, 45%, 89%);
+      --secondary-color: hsl(218, 44%, 22%);
+      --card-bg: rgba(134, 134, 134, 0.25);
+      --font-primary: 'Outfit', sans-serif;
+      --heading-size: 22px;
+      --padding-global: 1.5rem;
+      --border-radius: 25px;
+      --box-shadow: 0px 4px 10px rgba(134, 134, 134, 0.25);
+      --font-weight-normal: 300;
+      --font-weight-bold: 700;
+      --font-weight-bolder: 900;
+      --font-weight-light: 100;
+      --font-weight-medium: 500;
+    }
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Outfit', sans-serif;
+      background-color: var(--primary-color);
+    }
+
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--padding-global);
+      user-select: none;
+    }
+
+    .card{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      border-radius: 25px;
+      background-color: hsl(0, 0%, 100%);
+      padding: 15px;
+      width: 330px;
+      box-shadow: var(--box-shadow);
+    }
+    .card .qr-code{
+      width: 100%;
+      height: auto;
+      border-radius: 25px;
+    }
+
+    .card h1{
+      font-size: 22px;
+      font-weight: var(--font-weight-bold);
+      text-align: center;
+      margin: 1.5rem 1.5rem 0 1.5rem;
+    }
+
+    .card p{
+      text-align: center;
+      font-weight: 300;
+      margin: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <img src="./images/image-qr-code.png" alt="QR Code" class="qr-code">
+      <h1>Improve your front-end skills by building projects</h1>
+      <p>Scan the QR code to visit Frontend Mentor and take your coding skills to the next level</p>
+    </div>
+
+    <div class="product1"></div>
+  </div>
+</body>
+</html>
