@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Social links profile</title>
+
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+    
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      font-family:  'Inter', sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: black;
+    }
+
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 100%;
+      background-color: black;
+      color: white;
+    }
+
+    .card{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: hsl(0, 0%, 12%);
+      padding: 1rem;
+      width: 370px;
+      border-radius: 10px;;
+    }
+
+    .card__image{
+      width: 80px;
+      height: 80px;
+      margin: 2rem;
+    }
+
+    .card__image img{
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+    }
+
+    .card__info{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .card__name{
+      font-size: 25px;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .card__location{
+      color: hsl(75, 94%, 57%);
+      margin-bottom: 0.5rem;
+      font-size: 13px;
+      font-weight: 700;
+      opacity: 0.9;
+    }
+
+    .card__bio{
+      font-size: 13px;
+      margin-top: 1.3rem;
+    }
+
+    .card__contact{
+      width: 330px;
+      padding: 1.3rem 1rem 1.3rem 1rem; ;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: flex-start;
+      gap: 1.2rem;
+      margin-bottom: 1rem;
+    }
+
+    .contact{
+      background-color:hsl(0, 0%, 20%);
+      outline: none;
+      border: none;
+      border-radius: 6px;
+      padding: 10px;
+      width: 100%;
+      cursor: pointer;
+    }
+
+    .contact a{
+      text-decoration: none;
+      color: white;
+      font-size: 13px;
+      font-weight: 900;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card__image">
+        <img src="assets/images/avatar-jessica.jpeg" alt="">
+      </div>
+
+      <div class="card__info">
+        <h1 class="card__name">Jessica Randall</h1>
+        <p class="card__location">London, United Kingdom</p>
+        <p class="card__bio">"Front-end developer and avid reader."</p>
+
+        <div class="card__contact">
+          <button class="contact"><a href="github.com">GitHub</a></button>
+          <button class="contact"><a href="#Frontend Mentor">Frontend Mentor</a></button>
+          <button class="contact"><a href="linkedin.com">LinkedIn</a></button>
+          <button class="contact"><a href="twitter.com">Twitter</a></button>
+          <button class="contact"><a href="instagram.com">Instagram</a></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
