@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Blog preview card</title>
+
+  
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+    :root{
+      --color-primary:  hsl(47, 88%, 63%);
+      --color-secondary: hsl(0, 0%, 100%);
+      --color-tertiary: hsl(0, 0%, 42%);
+      --color-quartnary: hsl(0, 0%, 7%);
+      --font-primary: "Roboto", sans-serif;
+    }
+
+    *{
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body{
+      display: flex;
+      align-items: center;
+      font-family: var(--font-primary);
+      justify-content: center;
+      height: 100vh;
+      background-color: var(--color-primary);
+      user-select: none;
+    }
+
+    .container{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    .card{
+      display: flex;
+      flex-direction: column;
+      color: black;
+      background-color: var(--color-secondary);
+      padding: 25px;
+      width: 415px;
+      border: 2px solid var(--color-quartnary);
+      border-radius: 15px;
+      box-shadow: 10px 10px 0px var(--color-quartnary);;
+    }
+
+    .card__image img{
+      width: 100%;
+      height: auto;
+      border-radius: 15px;
+    }
+
+    .card__info{
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 20px;
+      width: 100%;
+      padding-right: 1rem;
+    }
+
+    .info__status{
+      display: flex;
+      flex-direction: column;
+      justify-self: center;
+      gap: 15px;
+      margin-top: 1rem;
+    }
+    
+    .status{  
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100px;
+      padding: 5px 10px;
+      font-weight: 900;
+      border-radius: 5px;
+      background-color: var(--color-primary);
+    }
+
+    .status__date{
+      font-size: 1rem;
+      color: var(--color-quartnary);
+      font-weight: 600;
+    }
+
+    .title{
+      font-size: 1.5rem;
+    }
+
+    .description{
+      font-size: 1rem;
+      line-height: 1.5rem;
+      color: var(--color-tertiary);
+    }
+
+    .author{
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-top: 1rem;
+    }
+    .author img{
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+    }
+
+    .author__info h2{
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="card__image">
+        <img src="./assets/images/illustration-article.svg" alt="Blog preview card image">
+      </div>
+      <div class="card__info">
+        <div class="info__status">
+          <span class="status">Learning</span>
+          <span class="status__date">Published 21 Dec 2023</span>
+        </div>
+
+        <h1 class="title">HTML & CSS foundations</h1>
+        <p class="description">
+          These languages are the backbone of every website, defining structure, content, and presentation.
+        </p>
+
+        <div class="author">
+          <img src="./assets/images/image-avatar.webp" alt="Author image">
+          <div class="author__info">
+            <h2>Greg Hooper</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+</body>
+</html>
