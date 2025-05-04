@@ -16,6 +16,7 @@ The designs were created to the following widths:
 - Purple 600: hsl(292, 16%, 49%)
 - Purple 950: hsl(292, 42%, 14%)
 
+
 ## Typography
 
 ### Body Copy

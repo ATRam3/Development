@@ -1,48 +1,310 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
-
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Displays site properly based on user's device -->
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png" />
   <title>Frontend Mentor | FAQ accordion</title>
 
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <!-- Feel free to remove these styles or customize them in your own stylesheet 👍 -->
   <style>
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    @import url('https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Work+Sans:ital,wght@0,100..900;1,100..900&family=Young+Serif&display=swap');
+
+    :root {
+      --White: hsl(0, 100%, 100%);
+      --Purple100: hsl(275, 100%, 97%);
+      --Purple600: hsl(292, 16%, 49%);
+      --Purple950: hsl(292, 42%, 14%);
+      --Purple1000: hsl(293, 54%, 61%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: "Roboto", sans-serif;
+      min-height: 100vh;
+      background-color: var(--Purple100);
+    }
+
+    .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-self: center;
+    }
+
+    .container__img{
+     width: 100%;
+    }
+
+    .large-scr{
+      width: 100%;
+      max-height: 100%;
+    }
+
+    
+    .small-scr {
+      display: none;
+    }
+
+    .faq__section {
+      position: absolute;
+      top: 20%;
+      padding: 2rem;
+      border-radius: 10px;
+      background-color: var(--White);
+      box-shadow: 0px 2px 4px 0px var(--Purple600);
+      max-width: 600px;
+      z-index: 100;
+    }
+
+    .faq__header {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 1rem;
+      margin-bottom: 20px;
+    }
+
+    .faq__icon {
+      width: 25px;
+    }
+
+    .faq__title {
+      font-size: 40px;
+      color: var(--Purple950);
+    }
+
+    .faq__item {
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--Purple100);
+    }
+
+    .faq__question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      cursor: pointer;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      background-color: var(--White);
+    }
+
+    .faq__question h2 {
+      font-size: 1rem;
+      color: var(--Purple950);
+    }
+
+    .faq__question h2:hover{
+      color: var(--Purple1000);
+    }
+
+    .faq__icons {
+      right: 0;
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .plus__icon{
+     display: block;
+    }
+
+    .minus__icon{
+      display: none;
+    }
+
+    .faq__icons button {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0;
+    }
+
+    .faq__answer {
+      padding: 1rem;
+      display: none;
+    }
+    
+    .answer{
+      color: var(--Purple600);
+    }
+
+    .faq__item.active .faq__answer{
+      display: block;
+    }
+
+    .active{
+      display: block;
+    }
+
+    @media (max-width: 705px) {
+      .faq__section{
+        width: 400px;
+        top: 6rem;
+      }
+    }
+
+    @media (max-width: 510px) {
+      .large-scr{
+        display: none;
+      }
+      .small-scr{
+        display: flex;
+        width: 500px;
+        height: 310px;
+        align-items: stretch;
+        overflow: hidden;
+      }
+      .faq__section{
+        width: 77%;
+        top: 12rem;
+      }
+    }
   </style>
 </head>
 <body>
+  <div class="container">
+    <div class="container__img">
+      <img src="assets/images/background-pattern-mobile.svg" alt="Mobile background pattern" class="small-scr" />
+      <img src="assets/images/background-pattern-desktop.svg" alt="Desktop background pattern" class="large-scr" />
+    </div>
+    <div class="faq__section">
+      <div class="faq__header">
+        <img src="assets/images/icon-star.svg" alt="Star icon" class="faq__icon" />
+        <h1 class="faq__title">FAQs</h1>
+      </div>
+      <div class="faq-questions">
+        <div class="faq__item">
+          <div class="faq__question">
+            <h2>What is Frontend Mentor, and how will it help me?</h2>
+            <div class="faq__icons">
+              <button aria-label="Expand" class="plus__icon active">
+                <img src="assets/images/icon-plus.svg" alt="Plus icon" />
+              </button>
+              <button aria-label="Collapse" class="minus__icon">
+                <img src="assets/images/icon-minus.svg" alt="Minus icon" />
+              </button>
+            </div>
+          </div>
+          <div class="faq__answer">
+            <p class="answer">
+              Frontend Mentor offers realistic coding challenges to help developers improve their
+              frontend coding skills with projects in HTML, CSS, and JavaScript. It's suitable for
+              all levels and ideal for portfolio building.
+            </p>
+          </div>
+        </div>
 
-  FAQs
+        <div class="faq__item">
+          <div class="faq__question">
+            <h2>Is Frontend Mentor free?</h2>
+            <div class="faq__icons">
+              <button aria-label="Expand" class="plus__icon active">
+                <img src="assets/images/icon-plus.svg" alt="Plus icon" />
+              </button>
+              <button aria-label=" Collapse" class="minus__icon" >
+                <img src="assets/images/icon-minus.svg" alt="Minus icon" />
+              </button>
+            </div>
+          </div>
+          <div class="faq__answer">
+            <p class="answer">
+              Yes, Frontend Mentor offers both free and premium coding challenges, with the free
+              option providing access to a range of projects suitable for all skill levels.
+            </p>
+          </div>
+        </div>
 
-  What is Frontend Mentor, and how will it help me?
+        <div class="faq__item">
+          <div class="faq__question">
+            <h2>Can I use Frontend Mentor projects in my portfolio?</h2>
+            <div class="faq__icons">
+              <button aria-label="Expand" class="plus__icon active">
+                <img src="assets/images/icon-plus.svg" alt="Plus icon" />
+              </button>
+              <button aria-label="Collapse" class="minus__icon">
+                <img src="assets/images/icon-minus.svg" alt="Minus icon" />
+              </button>
+            </div>
+          </div>
+          <div class="faq__answer">
+            <p class="answer">
+              Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent
+              way to showcase your skills to potential employers!
+            </p>
+          </div>
+        </div>
 
-  Frontend Mentor offers realistic coding challenges to help developers improve their 
-  frontend coding skills with projects in HTML, CSS, and JavaScript. It's suitable for 
-  all levels and ideal for portfolio building.
-
-  Is Frontend Mentor free?
-
-  Yes, Frontend Mentor offers both free and premium coding challenges, with the free 
-  option providing access to a range of projects suitable for all skill levels.
-
-  Can I use Frontend Mentor projects in my portfolio?
-
-  Yes, you can use projects completed on Frontend Mentor in your portfolio. It's an excellent
-  way to showcase your skills to potential employers!
-
-  How can I get help if I'm stuck on a Frontend Mentor challenge?
-  
-  The best place to get help is inside Frontend Mentor's Discord community. There's a help 
-  channel where you can ask questions and seek support from other community members.
-
-  
-  <div class="attribution">
-    Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
-    Coded by <a href="#">Your Name Here</a>.
+        <div class="faq__item">
+          <div class="faq__question">
+            <h2>How can I get help if I'm stuck on a Frontend Mentor challenge?</h2>
+            <div class="faq__icons">
+              <button aria-label="Expand" class="plus__icon active">
+                <img src="assets/images/icon-plus.svg" alt="Plus icon" />
+              </button>
+              <button aria-label="Collapse" class="minus__icon">
+                <img src="assets/images/icon-minus.svg" alt="Minus icon" />
+              </button>
+            </div>
+          </div>
+          <div class="faq__answer">
+            <p class="answer">
+              The best place to get help is inside Frontend Mentor's Discord community. There's a help
+              channel where you can ask questions and seek support from other community members.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
+
+
+  <script>
+    const faqItems = document.querySelectorAll('.faq__item');
+    console.log(faqItems);
+    
+    faqItems.forEach(function(item){
+      const plusIcon = item.querySelector('.plus__icon');
+      const minusIcon = item.querySelector('.minus__icon');
+      const question = item.querySelector('.faq__question');
+      const answer = item.querySelector('.faq__answer');
+
+      plusIcon.addEventListener('click', function(){
+        document.querySelectorAll('.minus__icon').forEach(item => {item.style.display = 'none'});
+        document.querySelectorAll('.plus__icon').forEach(item => {item.style.display = 'block'});
+        document.querySelectorAll('.faq__answer').forEach(item => {item.classList.remove('active')});
+
+        answer.classList.add('active');
+        plusIcon.style.display = 'none';
+        minusIcon.style.display = 'block';
+      });
+
+      minusIcon.addEventListener('click', function(){
+        event.stopPropagation();
+        console.log('clicked');
+        answer.classList.remove('active');
+        plusIcon.style.display = 'block';
+        minusIcon.style.display = 'none';
+      });
+
+      question.addEventListener('click', function(){
+        document.querySelectorAll('.minus__icon').forEach(item => {item.style.display = 'none'});
+        document.querySelectorAll('.plus__icon').forEach(item => {item.style.display = 'block'});
+        document.querySelectorAll('.faq__answer').forEach(item => {item.classList.remove('active')});
+
+        answer.classList.add('active');
+        plusIcon.style.display = 'none';
+        minusIcon.style.display = 'block';
+      });
+    });
+
+
+    
+  </script>
 </body>
 </html>
