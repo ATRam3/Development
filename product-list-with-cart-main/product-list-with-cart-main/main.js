@@ -72,84 +72,81 @@ const desserts = [
       alt: "Vanilla Panna Cotta"
     }
   ];
-
+  
   const dessertItems = document.querySelector('.dessert__items');
   
-  desserts.forEach(function(item){
+  desserts.forEach(function(dessert) {
     const dessertItem = document.createElement('div');
     dessertItem.classList.add('dessert__item');
-
+  
     dessertItem.innerHTML = `
-        <div class="dessert__item">
           <div class="dessert__image-container">
-            <img src="${item.image}" alt="${item.alt}" class="dessert__image">
-            <button class="dessert__btn"><img src="assets/images/icon-add-to-cart.svg" alt=""><span class="cart__text">Add to Cart</span></button>
+            <img src="${dessert.image}" alt="${dessert.alt}" class="dessert__image">
+            <button class="dessert__btn">
+              <img src="assets/images/icon-add-to-cart.svg" alt="">
+              <span class="cart__text">Add to Cart</span>
+            </button>
           </div>
           <div class="dessert__info">
-            <span class="dessert__name">${item.name}</span>
-            <h2 class="dessert__item-title">${item.title}</h2>
-            <p class="dessert__price">${item.price}</p>
-            
+            <span class="dessert__name">${dessert.name}</span>
+            <h2 class="dessert__item-title">${dessert.title}</h2>
+            <p class="dessert__price">${dessert.price}</p>
           </div>
-        </div>
     `;
-
-    dessertItems.appendChild(dessertItem);
-
-    //console.log(dessertItems);
-  });
-
-
-  const dessertItem = document.querySelectorAll('.dessert__item');
   
-
-  dessertItem.forEach(function(item){
-    const cartBtn = item.querySelector('.dessert__btn');
-    const dessertImage = item.querySelector('.dessert__image');
-    cartBtn.addEventListener('click', function(){
-        console.log('clicked');
-
-        console.log(dessertImage);
-        dessertImage.style.border = '2px solid var(--Red)';
-
-        cartBtn.style.display = "none";
-
-        const dessertImageCont = item.querySelector('.dessert__image-container');
-        const itemQuantity = document.createElement('div');
-        itemQuantity.classList.add('item__quantity');
-
-        itemQuantity.innerHTML = `
-            <img src="assets/images/icon-decrement-quantity.svg" class="decreament" alt="">
-            <span class="amount">1</span>
-            <img src="assets/images/icon-increment-quantity.svg" class="increament" alt="">
-        `;
-
-        //console.log(dessertImageCont);
-
-        dessertImageCont.appendChild(itemQuantity);
-        const cartQuantity = document.getElementById('cartQuantity');
-
-        cartQuantity.innerText ++;
+    // Append to page
+    dessertItems.appendChild(dessertItem);
+  
+    // Add to cart button logic
+    const cartBtn = dessertItem.querySelector('.dessert__btn');
+    const dessertImage = dessertItem.querySelector('.dessert__image');
+  
+    cartBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+  
+      dessertImage.style.border = '2px solid var(--Red)';
+      cartBtn.style.display = "none";
+  
+      const dessertImageCont = dessertItem.querySelector('.dessert__image-container');
+      const itemQuantity = document.createElement('div');
+      itemQuantity.classList.add('item__quantity');
+  
+      itemQuantity.innerHTML = `
+        <img src="assets/images/icon-decrement-quantity.svg" class="decreament" alt="">
+        <span class="amount">1</span>
+        <img src="assets/images/icon-increment-quantity.svg" class="increament" alt="">
+      `;
+  
+      dessertImageCont.appendChild(itemQuantity);
+  
+      const cartQuantity = document.getElementById('cartQuantity');
+      const currentQuantity = parseInt(cartQuantity.innerText) || 0;
+      cartQuantity.innerText = currentQuantity + 1;
+  
+      // Now correctly pass the dessert data object
+      updateCart(dessert, currentQuantity + 1);
     });
   });
+  
+  function updateCart(item, totalQuantity) {
+    const dessertCartItem = document.querySelector('.dessert__cart-items');
+    const numericPrice = parseFloat(item.price.replace('$', ''));
+    const dessertCart = document.querySelector('.dessert__cart');
 
+    const cartItem = document.createElement('div');
+    cartItem.classList.add('cart__item');
+    
+    cartItem.innerHTML = `
+      <div class="dessert__image-container">
+        <img src="${item.image}" alt="${item.alt}" class="dessert__image">
+      </div>
+      <div class="dessert__info">
+        <h2 class="dessert__item-title">${item.title}</h2>
+        <p class="dessert__price">@ ${item.price} | Total: $${(numericPrice * totalQuantity).toFixed(2)}</p>
+      </div>
+    `;
 
-
-  function updateCart(){
-    const dessertCart = document.querySelector('.dessert__cart-items');
+    dessertCartItem.appendChild(cartItem);
 
 
   }
-  
-
-  const number  = document.querySelector('.number');
-  const increase =document.querySelector('.increase');
-
-  increase.addEventListener('click', function(){
-    number.innerText++;
-  });
-
-
-
-
-
