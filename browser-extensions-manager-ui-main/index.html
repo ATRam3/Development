@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+  
+  <title>Frontend Mentor | Browser extensions manager UI</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    :root {
+      /* Neutral Colors */
+      --neutral-900: hsl(227, 75%, 14%);
+      --neutral-800: hsl(226, 25%, 17%);
+      --neutral-700: hsl(225, 23%, 24%);
+      --neutral-600: hsl(226, 11%, 37%);
+      --neutral-300: hsl(0, 0%, 78%);
+      --neutral-200: hsl(217, 61%, 90%);
+      --neutral-100: hsl(0, 0%, 93%);
+      --neutral-0: hsl(200, 60%, 99%);
+
+      /* Red Colors */
+      --red-400: hsl(3, 86%, 64%);
+      --red-500: hsl(3, 71%, 56%);
+      --red-700: hsl(3, 77%, 44%);
+
+      /* Gradients */
+      --gradient: linear-gradient(180deg, #040918 0%, #091540 100%);
+    }
+
+    .dark__mode{
+      /* Neutral Colors */
+      --neutral-0: hsl(227, 75%, 14%);
+      --neutral-100: hsl(226, 25%, 17%);
+      --neutral-200: hsl(225, 23%, 24%);
+      --neutral-300: hsl(226, 11%, 37%);
+      --neutral-600: hsl(0, 0%, 78%);
+      --neutral-700: hsl(217, 61%, 90%);
+      --neutral-800: hsl(0, 0%, 93%);
+      --neutral-800: hsl(200, 60%, 99%);
+
+      /* Red Colors */
+      --red-700: hsl(3, 86%, 64%);
+      --red-500: hsl(3, 71%, 56%);
+      --red-400: hsl(3, 77%, 44%);
+
+      /* Gradients */
+      --gradient: linear-gradient(180deg, #EBF2FC 0%, #EEF8F9 100%);
+    }
+
+    *{
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+    }
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: var(--gradient);
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-attachment: fixed;
+      color: var(--neutral-0);
+    }
+
+    body.light__mode{
+      background-color: var(--light-gradient);
+    }
+    .container{
+      display: grid;
+      max-width: 1200px;
+      padding: 2rem;
+      grid-template-rows: auto 1fr;
+      margin: 0 auto;
+    }
+    
+    .header{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 7px;
+      border-radius: 7px;
+      width: 100%;
+      background-color: var(--neutral-800);
+      margin-top: 0 2rem 0 2rem;
+    }
+    header.light__mode{
+      
+    }
+
+    .logo img{
+      width: 150px;
+      color: white;
+    }
+
+    .theme__dark{
+      display: none;
+      background-color: var(--neutral-700);
+      width: 40px;
+      height: 40px;
+      border-radius: 7px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+    }
+
+    .theme__light{
+      display: none;
+      background-color: var(--neutral-700);
+      width: 40px;
+      height: 40px;
+      border-radius: 7px;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      transition: 0.2s ease-in-out;
+    }
+
+    .theme__light:hover{
+      background-color: var(--neutral-600);
+    }
+
+    .theme img{
+      width: 20px;
+    }
+
+    .active__theme{
+      display: block;
+    }
+
+    .filter{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+      gap: 1rem;
+      padding: 2rem;
+    }
+
+    .filter__option{
+      display: flex;
+      gap: 10px;
+    }
+
+    .filter__btn{
+      background-color: var(--neutral-800);
+      border: 1px solid var(--neutral-600);
+      outline: none;
+      padding: 10px;
+      border-radius: 2rem;
+      color: var(--neutral-0);
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    .filter__btn:hover{
+      background-color: var(--neutral-700);
+    }
+
+    .filter__all{
+      width: 50px;
+    }
+    .filter__active{
+      width: 70px;
+    }
+    .filter__inactive{
+      width: 80px;
+    }
+    .active__filter{
+      display: block;
+      background-color: var(--red-500);
+      color: var(--neutral-800);
+      border: none;
+    }
+    .active__filter:hover{
+      background-color: var(--red-700);
+    }
+
+    .extensions{
+      display: grid;
+      grid-template-columns: repeat(1, 1fr);
+      gap: 15px;
+    }
+    .extension{
+      display: grid;
+      gap: 1rem;
+      background-color: var(--neutral-800);
+      padding: 1rem;
+      border: 1px solid var(--neutral-600);
+      border-radius: 1rem;
+    }
+
+    .extension__info{
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .extension__icon{
+      width: 50px;
+      height: 50px
+    }
+
+    .extension__description{
+      padding-top: 7px;
+      font-size: 15px;
+      font-weight: 100;
+      color: var(--neutral-300);
+    }
+    .toggles{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .extension__remove{
+      background-color: transparent;
+      color: var(--neutral-0);
+      outline: none;
+      padding: 5px;
+      width: 75px;
+      border: 1px solid var(--neutral-600);
+      border-radius: 2rem;
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.3s ease-in-out;
+    }
+
+    .extension__remove:hover{
+      background-color: var(--neutral-700);
+    }
+
+    .toggle{
+      position: relative;
+      display: inline-block;
+    }
+    .toggle__input{
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle__slider{
+      position: absolute;
+      top: 0;
+      left: -30px;
+      right: 0;
+      bottom: 0;
+      width: 30px;
+      height: 15px;
+      border-radius: 2rem;
+      background-color: var(--neutral-600);
+      cursor: pointer;
+    }
+
+    .toggle__slider::before{
+      content: '';
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      left: 0.87px;
+      top: 0.87px;
+      border-radius: 50%;
+      background-color: var(--neutral-800);
+      transition: 0.3s ease-in-out;
+    }
+
+    .toggle__input:checked + .toggle__slider{
+      background-color: var(--red-400);
+    }
+    .toggle__input:checked + .toggle__slider::before{
+      transform: translateX(15px);
+    }
+
+    @media (min-width: 650px){
+      .extensions{
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .filter{
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem 0 2rem 0;
+      }
+    }
+
+    @media (min-width: 870px){
+      .extensions{
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+  </style>
+</head>
+<body class="body">
+  <div class="container">
+    <header class="header">
+      <div class="logo">
+        <img src="./assets/images/logo.svg" alt="Browser Extensions Manager Logo">
+      </div>
+
+      <div class="theme">
+        <button class="theme__dark">
+          <img src="./assets/images/icon-moon.svg" alt="Dark Theme Icon">
+        </button>
+        <button class="theme__light active__theme">
+          <img src="./assets/images/icon-sun.svg" alt="Light Theme Icon">
+        </button>
+      </div>
+    </header>
+
+    <main class="main">
+      <div class="filter">
+        <h2 class="ext__list">
+          Extensions List
+        </h2>
+        <div class="filter__option">
+          <button class="filter__all active__filter filter__btn">All</button>
+          <button class="filter__active filter__btn">Active</button>
+          <button class="filter__inactive filter__btn">Inactive</button>
+        </div>
+      </div>
+
+      <div class="extensions">
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-devlens.svg" alt="DevLens Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">DevLens</h3>
+              <p class="extension__description">Quickly inspect page layouts and visualize element boundaries.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-style-spy.svg" alt="StyleSpy Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">StyleSpy</h3>
+              <p class="extension__description">Instantly analyze and copy CSS from any webpage element.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-speed-boost.svg" alt="SpeedBoost Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">SpeedBoost</h3>
+              <p class="extension__description">Optimizes browser resource usage to accelerate page loading.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div> 
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-json-wizard.svg" alt="JSONWizard Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">JSONWizard</h3>
+              <p class="extension__description">Formats, validates, and prettifies JSON responses in-browser.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div> 
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-tab-master-pro.svg" alt="TabMaster Pro Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">TabMaster Pro</h3>
+              <p class="extension__description">Organizes browser tabs into groups and sessions.</p>  
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-viewport-buddy.svg" alt="viewportBuddy Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">ViewportBuddy</h3>  
+              <p class="extension__description">Simulates various screen resolutions directly within the browser.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-markup-notes.svg" alt="Markup Notes Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">Markup Notes</h3>
+              <p class="extension__description">Enables annotation and notes directly onto webpages for collaborative debugging.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-grid-guides.svg" alt="GridGuides Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">GridGuides</h3>
+              <p class="extension__description">Overlay customizable grids and alignment guides on any webpage.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-palette-picker.svg" alt="Palette Picker Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">Palette Picker</h3>
+              <p class="extension__description">Instantly extracts color palettes from any webpage.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-link-checker.svg" alt="LinkChecker Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">LinkChecker</h3>
+              <p class="extension__description">Scans and highlights broken links on any page.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-dom-snapshot.svg" alt="DOM Snapshot Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">DOM Snapshot</h3>
+              <p class="extension__description">Capture and export DOM structures quickly.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="extension">
+          <div class="extension__info">
+            <img src="./assets/images/logo-console-plus.svg" alt="ConsolePlus Icon" class="extension__icon">
+            <div class="extension__details">
+              <h3 class="extension__name">ConsolePlus</h3>
+              <p class="extension__description">Enhanced developer console with advanced filtering and logging.</p>
+            </div>
+          </div>
+          
+          <div class="toggles">
+            <button class="extension__remove">Remove</button>
+            <label class="toggle">
+              <input type="checkbox" class="toggle__input" checked>
+              <span class="toggle__slider"></span>
+            </label>
+          </div>
+    </main>
+  </div>
+
+  <script src="assets/main.js"></script>
+  
+
+
+
+  <div class="attribution">
+    Challenge by <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>. 
+    Coded by <a href="#">Amen Teshome (ATR)</a>.
+  </div>
+</body>
+</html>
