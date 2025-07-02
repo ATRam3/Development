@@ -81,11 +81,14 @@ const desserts = [
       quantity: 1
     }
   ];
+
+  renderDesserts(); // Initial render of desserts
   
   // ... your desserts array remains the same ...
 
-const dessertItems = document.querySelector('.dessert__items');
-
+function renderDesserts() {
+  const dessertItems = document.querySelector('.dessert__items');
+  dessertItems.innerHTML = ''; // Clear existing items
   desserts.forEach(function(dessert) {
     const dessertItem = document.createElement('div');
     dessertItem.classList.add('dessert__item');
@@ -141,6 +144,7 @@ const dessertItems = document.querySelector('.dessert__items');
       decreament(dessert);
     });
   });
+}
 
   function increament(item) {
     const itemQuantity = document.querySelector(`.item__quantity[data-id="${item.id}"]`);
@@ -297,7 +301,7 @@ const dessertItems = document.querySelector('.dessert__items');
 const orderBtn = document.querySelector('.order__btn');
 
 if(orderBtn){
-  orderBtn.addEventListener('click', function(e) {
+  orderBtn.addEventListener('click', function() {
     const checkout = document.querySelector('.checkout');
     
     checkout.classList.add('active');
@@ -314,32 +318,53 @@ if(orderBtn){
    }
  });
 
- const startNewOrder = document.querySelector('.order__btn');
- startNewOrder.addEventListener('click', function(e) {
-   e.stopPropagation();
-   const checkout = document.querySelector('.checkout');
-   checkout.classList.remove('active');
+ const startNewOrder = document.querySelector('.newOrder__btn');
 
-   // Reset cart items
-   const dessertCartItem = document.querySelector('.dessert__cart-items');
-   dessertCartItem.innerHTML = '';
+startNewOrder.addEventListener('click', function(e) {
+  e.stopPropagation();
+  const checkout = document.querySelector('.checkout');
+  checkout.classList.remove('active');
 
-   // Reset dessert items
-   desserts.forEach(function(dessert) {
-     const dessertItem = document.querySelector(`.dessert__item[data-id="${dessert.id}"]`);
-     if (dessertItem) {
-       const dessertImage = dessertItem.querySelector('.dessert__image');
-       const cartBtn = dessertItem.querySelector('.dessert__btn');
-       const itemQuantity = dessertItem.querySelector('.item__quantity');
-       
-       dessertImage.style.border = 'none';
-       cartBtn.style.display = "flex";
-       if (itemQuantity) itemQuantity.remove();
-     }
-     dessert.quantity = 1; // Reset quantity
-   });
+  // Reset dessert quantities
+  desserts.forEach(function(dessert) {
+    dessert.quantity = 1;
+  });
 
-   // Reset totals
-   totalCartAmount();
-   updateCartCount();
- });
+  // FIXED: Only remove cart items, preserve other cart elements
+  const dessertCartItem = document.querySelector('.dessert__cart-items');
+  
+  // Remove cart items but keep other elements
+  const cartItems = dessertCartItem.querySelectorAll('.cart__item');
+  cartItems.forEach(item => item.remove());
+  
+  // Show empty cart state
+  const emptyCart = dessertCartItem.querySelector('.empty__cart');
+  if (emptyCart) emptyCart.style.display = 'flex';
+  
+  // Hide other cart sections
+  const totalOrder = dessertCartItem.querySelector('.total__order');
+  const delivery = dessertCartItem.querySelector('.delivery');
+  const confirmOrder = dessertCartItem.querySelector('.confirm__order');
+  
+  if (totalOrder) totalOrder.style.display = 'none';
+  if (delivery) delivery.style.display = 'none';
+  if (confirmOrder) confirmOrder.style.display = 'none';
+
+  // Reset UI state for all dessert items
+  const dessertItems = document.querySelectorAll('.dessert__item');
+  dessertItems.forEach(function(dessertItem) {
+    const dessertImage = dessertItem.querySelector('.dessert__image');
+    const cartBtn = dessertItem.querySelector('.dessert__btn');
+    const itemQuantity = dessertItem.querySelector('.item__quantity');
+
+    dessertImage.style.border = 'none';
+    cartBtn.style.display = "flex";
+    if (itemQuantity) itemQuantity.remove();
+  });
+
+  // Update cart count and total
+  const cartQuantity = document.getElementById('cartQuantity');
+  const totalAmount = document.querySelector('.total-amount');
+  cartQuantity.textContent = '0';
+  totalAmount.textContent = '$0.00';
+});
